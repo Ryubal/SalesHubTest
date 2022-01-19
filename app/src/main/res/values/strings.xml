@@ -14,4 +14,8 @@
     <string name="section.library">Library</string>
     <string name="section.watched">Watched movies</string>
     <string name="section.watchlist">Watchlist</string>
+
+    <string name="library.empty">No movies to show</string>
+
+    <string name="lorem">Lorem ipmsum dolor sit amet</string>
 </resources>
