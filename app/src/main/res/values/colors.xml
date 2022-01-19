@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="border">#e0e0e0</color>
+
+    <color name="movies_icon_delete">#bbb</color>
+    <color name="movies_icon_unwatched">#bbb</color>
+    <color name="movies_icon_watched">#FF6200EE</color>
 </resources>

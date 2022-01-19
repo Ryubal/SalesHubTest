@@ -7,15 +7,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="misc.error">Error</string>
 
     <string name="section.library">Library</string>
     <string name="section.watched">Watched movies</string>
     <string name="section.watchlist">Watchlist</string>
 
     <string name="library.empty">No movies to show</string>
+
+    <string name="library.new.name">Movie name</string>
+    <string name="library.new.error_exists">This movie already exists</string>
+    <string name="library.new.success">Movie added successfully</string>
 
     <string name="lorem">Lorem ipmsum dolor sit amet</string>
 </resources>

@@ -1,28 +1,31 @@
 package com.ryubal.saleshubtest.db.entities;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "movies")
 public class Movie {
-	@PrimaryKey
+	@PrimaryKey(autoGenerate = true)
 	@NonNull
 	private int id;
 
 	private String name;
 
-	public Movie(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+	@ColumnInfo(defaultValue = "0")
+	private int isWatched;
 
-	public int getId() {
-		return id;
+	public Movie(String name) {
+		this.name = name;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -31,5 +34,13 @@ public class Movie {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getIsWatched() {
+		return isWatched;
+	}
+
+	public void setIsWatched(int isWatched) {
+		this.isWatched = isWatched;
 	}
 }

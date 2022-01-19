@@ -31,22 +31,6 @@
             android:text="@string/lorem"
             android:textSize="22sp" />
 
-        <ImageView
-            android:id="@+id/imageViewUnwatched"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="14dp"
-            android:src="@drawable/ic_outline_visibility_24"
-            app:tint="@color/movies_icon_unwatched" />
-
-        <ImageView
-            android:id="@+id/imageViewWatched"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="14dp"
-            android:src="@drawable/ic_outline_visibility_24"
-            app:tint="@color/movies_icon_watched" />
-
     </LinearLayout>
 
     <View
