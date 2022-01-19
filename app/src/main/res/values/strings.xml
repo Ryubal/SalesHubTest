@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="section.library">Library</string>
+    <string name="section.watched">Watched movies</string>
+    <string name="section.watchlist">Watchlist</string>
 </resources>

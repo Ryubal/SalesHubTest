@@ -18,7 +18,7 @@ import com.ryubal.saleshubtest.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-	private AppBarConfiguration mAppBarConfiguration;
+	private AppBarConfiguration appBarConfiguration;
 	private ActivityMainBinding binding;
 
 	@Override
@@ -26,26 +26,23 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
+
 		setContentView(binding.getRoot());
 
 		setSupportActionBar(binding.appBarMain.toolbar);
-		binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
+
 		DrawerLayout drawer = binding.drawerLayout;
 		NavigationView navigationView = binding.navView;
-		// Passing each menu ID as a set of Ids because each
-		// menu should be considered as top level destinations.
-		mAppBarConfiguration = new AppBarConfiguration.Builder(
-				R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+
+		// Fixing issue where click events wouldn't be detected
+		navigationView.bringToFront();
+
+		appBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_library, R.id.nav_watched, R.id.nav_watchlist)
 				.setOpenableLayout(drawer)
 				.build();
+
 		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-		NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+		NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 		NavigationUI.setupWithNavController(navigationView, navController);
 	}
 
@@ -59,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onSupportNavigateUp() {
 		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-		return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-				|| super.onSupportNavigateUp();
+		return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
 	}
 }
