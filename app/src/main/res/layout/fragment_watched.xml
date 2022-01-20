@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:itemCount="4"
-            tools:listitem="@layout/fragment_library_row" />
+            tools:listitem="@layout/fragment_watched_row" />
 
     </LinearLayout>
 

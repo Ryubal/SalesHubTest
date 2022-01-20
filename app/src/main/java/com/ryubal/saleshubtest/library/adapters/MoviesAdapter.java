@@ -20,7 +20,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.ViewHolder> 
 		void onWatchStatusChanged(Movie movie, boolean isWatched);
 	}
 
-	private MovieListener listener;
+	private final MovieListener listener;
 
 	public MoviesAdapter(DiffUtil.ItemCallback<Movie> diffUtilCallback, MovieListener listener) {
 		super(diffUtilCallback);

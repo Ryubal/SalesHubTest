@@ -3,7 +3,9 @@ package com.ryubal.saleshubtest.db;
 import android.content.Context;
 
 import com.ryubal.saleshubtest.db.daos.MovieDao;
+import com.ryubal.saleshubtest.db.daos.WatchingDao;
 import com.ryubal.saleshubtest.db.entities.Movie;
+import com.ryubal.saleshubtest.db.entities.Watching;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,13 +16,15 @@ import androidx.room.RoomDatabase;
 
 @Database(
 	entities = {
-		Movie.class
+		Movie.class,
+		Watching.class
 	},
 	version = 1,
 	exportSchema = false
 )
 public abstract class SalesHubDB extends RoomDatabase {
 	public abstract MovieDao movieDao();
+	public abstract WatchingDao watchingDao();
 
 	private static volatile SalesHubDB INSTANCE;
 	private static final int NUMBER_OF_THREADS = 4;

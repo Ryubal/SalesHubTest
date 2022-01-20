@@ -12,7 +12,7 @@ import androidx.lifecycle.LiveData;
 
 public class WatchedViewModel extends AndroidViewModel {
 
-	private MovieRepository repository;
+	private final MovieRepository repository;
 
 	private final LiveData<List<Movie>> watchedMovies;
 

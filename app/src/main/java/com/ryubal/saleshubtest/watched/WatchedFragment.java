@@ -18,6 +18,8 @@ import com.ryubal.saleshubtest.databinding.FragmentWatchedBinding;
 import com.ryubal.saleshubtest.db.entities.Movie;
 import com.ryubal.saleshubtest.watched.adapters.WatchedAdapter;
 
+import java.util.List;
+
 public class WatchedFragment extends Fragment implements WatchedAdapter.WatchedListener {
 
 	private FragmentWatchedBinding binding;
@@ -32,6 +34,12 @@ public class WatchedFragment extends Fragment implements WatchedAdapter.WatchedL
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		binding = FragmentWatchedBinding.inflate(inflater, container, false);
 
+		setupUI();
+
+		return binding.getRoot();
+	}
+
+	private void setupUI() {
 		// Set adapter
 		adapter = new WatchedAdapter(new WatchedAdapter.MoviesDiff(), this);
 
@@ -43,17 +51,15 @@ public class WatchedFragment extends Fragment implements WatchedAdapter.WatchedL
 		viewModel = new ViewModelProvider(requireActivity()).get(WatchedViewModel.class);
 
 		// Start observing watched movies
-		viewModel.getWatchedMovies().observe(requireActivity(), movies -> {
-			binding.textViewEmpty.setVisibility(movies.size() == 0 ? View.VISIBLE : View.GONE);
-			binding.recyclerView.setVisibility(movies.size() == 0 ? View.GONE : View.VISIBLE);
+		viewModel.getWatchedMovies().observe(requireActivity(), this::onMoviesChange);
+	}
 
-			// Update list
-			adapter.submitList(movies);
-		});
+	private void onMoviesChange(List<Movie> movies) {
+		binding.textViewEmpty.setVisibility(movies.size() == 0 ? View.VISIBLE : View.GONE);
+		binding.recyclerView.setVisibility(movies.size() == 0 ? View.GONE : View.VISIBLE);
 
-		// Attach fab?
-
-		return binding.getRoot();
+		// Update list
+		adapter.submitList(movies);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class WatchedAdapter extends ListAdapter<Movie, WatchedAdapter.ViewHolder
 		void onDelete(Movie movie);
 	}
 
-	private WatchedListener listener;
+	private final WatchedListener listener;
 
 	public WatchedAdapter(DiffUtil.ItemCallback<Movie> diffUtilCallback, WatchedListener listener) {
 		super(diffUtilCallback);

@@ -20,7 +20,7 @@ public interface MovieDao {
 	@Query("SELECT * FROM movies WHERE isWatched = 1")
 	LiveData<List<Movie>> getAllWatched();
 
-	@Query("SELECT EXISTS(SELECT * FROM movies WHERE name = :name)")
+	@Query("SELECT EXISTS(SELECT * FROM movies WHERE LOWER(name) = LOWER(:name))")
 	boolean doesMovieExist(String name);
 
 	@Query("UPDATE movies SET isWatched=:isWatched WHERE id=:id")

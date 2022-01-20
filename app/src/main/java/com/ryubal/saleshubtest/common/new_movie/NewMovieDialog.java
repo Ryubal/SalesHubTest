@@ -1,4 +1,4 @@
-package com.ryubal.saleshubtest.library.new_movie;
+package com.ryubal.saleshubtest.common.new_movie;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,7 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-import com.ryubal.saleshubtest.databinding.FragmentLibraryNewDialogBinding;
+import com.ryubal.saleshubtest.R;
+import com.ryubal.saleshubtest.databinding.DialogNewMovieBinding;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 
 public class NewMovieDialog extends DialogFragment implements DialogInterface.OnShowListener {
 
-	private FragmentLibraryNewDialogBinding binding;
+	private DialogNewMovieBinding binding;
 
 	public NewMovieDialog() {
 
@@ -23,12 +24,10 @@ public class NewMovieDialog extends DialogFragment implements DialogInterface.On
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		binding = FragmentLibraryNewDialogBinding.inflate(LayoutInflater.from(getActivity()));
-
-		// TODO - Export strings
+		binding = DialogNewMovieBinding.inflate(LayoutInflater.from(getActivity()));
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-				.setTitle("New movie")
+				.setTitle(getString(R.string.new_movie_new))
 				.setView(binding.getRoot())
 				.setPositiveButton(android.R.string.ok, null);
 
@@ -48,7 +47,7 @@ public class NewMovieDialog extends DialogFragment implements DialogInterface.On
 			String name = binding.textInputName.getEditText().getText().toString();
 
 			if(name.isEmpty()) {
-				binding.textInputName.setError("Please enter a movie name");
+				binding.textInputName.setError(getString(R.string.new_movie_validation_missing_name));
 				return;
 			}
 

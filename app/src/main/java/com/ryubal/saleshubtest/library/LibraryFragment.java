@@ -19,7 +19,9 @@ import com.ryubal.saleshubtest.R;
 import com.ryubal.saleshubtest.databinding.FragmentLibraryBinding;
 import com.ryubal.saleshubtest.db.entities.Movie;
 import com.ryubal.saleshubtest.library.adapters.MoviesAdapter;
-import com.ryubal.saleshubtest.library.new_movie.NewMovieDialog;
+import com.ryubal.saleshubtest.common.new_movie.NewMovieDialog;
+
+import java.util.List;
 
 public class LibraryFragment extends Fragment implements MoviesAdapter.MovieListener {
 
@@ -35,6 +37,12 @@ public class LibraryFragment extends Fragment implements MoviesAdapter.MovieList
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		binding = FragmentLibraryBinding.inflate(inflater, container, false);
 
+		setupUI();
+
+		return binding.getRoot();
+	}
+
+	private void setupUI() {
 		// Set adapter
 		adapter = new MoviesAdapter(new MoviesAdapter.MoviesDiff(), this);
 
@@ -46,42 +54,51 @@ public class LibraryFragment extends Fragment implements MoviesAdapter.MovieList
 		viewModel = new ViewModelProvider(requireActivity()).get(LibraryViewModel.class);
 
 		// Start observing movies list
-		viewModel.getMovies().observe(requireActivity(), movies -> {
-			binding.textViewEmpty.setVisibility(movies.size() == 0 ? View.VISIBLE : View.GONE);
-			binding.recyclerView.setVisibility(movies.size() == 0 ? View.GONE : View.VISIBLE);
-
-			// Update list
-			adapter.submitList(movies);
-		});
+		viewModel.getMovies().observe(requireActivity(), this::onMoviesChange);
 
 		// Attach listener for when trying to create a new movie
 		getChildFragmentManager().setFragmentResultListener("onNewMovie", this, (requestKey, result) -> {
 			String name = result.getString("movieName");
 
-			// Make sure this movie doesn't exist already
-			viewModel.doesMovieExist(name).observe(requireActivity(), doesMovieExist -> {
-				if(doesMovieExist) {
-					new AlertDialog.Builder(getContext())
-							.setTitle(getString(R.string.misc_error))
-							.setMessage(getString(R.string.library_new_error_exists))
-							.setPositiveButton(android.R.string.ok, null)
-							.show();
-				}else{
-					// Movie doesn't exist, let's insert it
-					viewModel.insert(new Movie(name));
-
-					Toast.makeText(getContext(), getString(R.string.library_new_success), Toast.LENGTH_SHORT).show();
-				}
-			});
+			onAddMovie(name);
 		});
 
 		// Attach fab to add a new movie
-		binding.fab.setOnClickListener(v -> {
-			NewMovieDialog newMovieDialog = new NewMovieDialog();
-			newMovieDialog.show(getChildFragmentManager(), "");
-		});
+		binding.fab.setOnClickListener(v -> onAddClick());
+	}
 
-		return binding.getRoot();
+	// When there's a change in the movies list
+	private void onMoviesChange(List<Movie> movies) {
+		binding.textViewEmpty.setVisibility(movies.size() == 0 ? View.VISIBLE : View.GONE);
+		binding.recyclerView.setVisibility(movies.size() == 0 ? View.GONE : View.VISIBLE);
+
+		// Update list
+		adapter.submitList(movies);
+	}
+
+	// When we want to add a new item
+	private void onAddClick() {
+		NewMovieDialog newMovieDialog = new NewMovieDialog();
+		newMovieDialog.show(getChildFragmentManager(), "");
+	}
+
+	// When we submitted the form to add a new item
+	private void onAddMovie(String name) {
+		// Make sure this movie doesn't exist already
+		viewModel.doesMovieExist(name).observe(requireActivity(), doesMovieExist -> {
+			if(doesMovieExist) {
+				new AlertDialog.Builder(getContext())
+						.setTitle(getString(R.string.misc_error))
+						.setMessage(getString(R.string.new_movie_error_already_exists))
+						.setPositiveButton(android.R.string.ok, null)
+						.show();
+			}else{
+				// Movie doesn't exist, let's insert it
+				viewModel.insert(new Movie(name));
+
+				Toast.makeText(getContext(), getString(R.string.new_movie_success), Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	// When clicking on "delete" to delete a movie

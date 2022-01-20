@@ -7,17 +7,23 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="misc.error">Error</string>
-
     <string name="section.library">Library</string>
     <string name="section.watched">Watched movies</string>
     <string name="section.watchlist">Watchlist</string>
 
+    <string name="new_movie.new">New movie</string>
+    <string name="new_movie.validation.missing_name">Please enter a movie name</string>
+    <string name="new_movie.name">Movie name</string>
+    <string name="new_movie.error.already_exists">This movie already exists</string>
+    <string name="new_movie.success">Movie added successfully</string>
+
+    <string name="misc.error">Error</string>
+
     <string name="library.empty">No movies to show</string>
 
-    <string name="library.new.name">Movie name</string>
-    <string name="library.new.error_exists">This movie already exists</string>
-    <string name="library.new.success">Movie added successfully</string>
+    <string name="watchlist.already_exists">Exists in your library</string>
+    <string name="watchlist.new.error_exists">This movie already exists</string>
+    <string name="watchlist.new.success">Movie added successfully</string>
 
     <string name="lorem">Lorem ipmsum dolor sit amet</string>
 </resources>

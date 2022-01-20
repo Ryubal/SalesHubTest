@@ -13,7 +13,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/library.new.name">
+        android:hint="@string/new_movie.name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
